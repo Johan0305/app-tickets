@@ -21,11 +21,7 @@ export const setCookies = async (
   cookie.set(nameCookie, value);
 };
 
-export const deleteCookies = async (
-  nameCookie: string
-): Promise<string | undefined> => {
+export const deleteCookies = async (nameCookie: string): Promise<void> => {
   const cookie = await cookies();
-  const cookieRequest = cookie.get(nameCookie)?.value;
-
-  return cookieRequest;
+  cookie.delete(nameCookie);
 };

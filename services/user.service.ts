@@ -29,3 +29,34 @@ export const RegisterUserSupaBase = async (formData: UserDataForm) => {
     HandleError(err);
   }
 };
+
+export const GetUser = async () => {
+  try {
+    const {
+      data: { user },
+      error,
+    } = await supabase.auth.getUser();
+
+    if (error) {
+      throw new Error(error?.message);
+    }
+
+    return user;
+  } catch (err: unknown) {
+    HandleError(err);
+  }
+};
+
+export const Logout = async () => {
+  try {
+    const { error } = await supabase.auth.signOut();
+
+    if (error) {
+      throw new Error(error?.message);
+    }
+
+    return true;
+  } catch (err: unknown) {
+    HandleError(err);
+  }
+};

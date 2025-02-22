@@ -1,14 +1,21 @@
 import { NextRequest, NextResponse } from "next/server";
 
+//Middleware para manejo de autenticación por Cookies
+
 export function middleware(request: NextRequest) {
   const token = request.cookies.get("token");
   const { pathname } = request.nextUrl;
 
+  //Si el usuario está en el path '/' y ya tiene un registro de Token en las cookies le da acceso a la aplicación, si está en cualquier otra dirección y no tiene el token, este lo redirige al login
   if (token && pathname === "/") {
-    return NextResponse.redirect(new URL("/dashboard", request.url));
-  } else if (pathname !== "/" && !token) {
-    return NextResponse.redirect(new URL("/", request.url));
+    return NextResponse.rewrite(new URL("/dashboard", request.url));
   }
+
+  if (pathname !== "/" && !token) {
+    return NextResponse.rewrite(new URL("/", request.url));
+  }
+
+  return NextResponse.next();
 }
 
 export const config = {

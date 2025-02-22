@@ -1,6 +1,6 @@
 "use client";
 
-import { userService } from "@/actions/user.actions";
+import { UserService } from "@/actions/user.actions";
 import { UserDataForm } from "@/interfaces/User/user.interface";
 import { Button, Label, TextInput } from "flowbite-react";
 import { ChangeEvent, FormEvent, useState } from "react";
@@ -11,8 +11,7 @@ export default function Home() {
     password: "",
   });
   const [typeForm, setTypeForm] = useState<string>("Login");
-
-  const { LoginUser, RegisterUser } = userService();
+  const { LoginUser, RegisterUser } = UserService();
 
   //Función encargada de cambiar el state de userData según el nombre de su input
   const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
@@ -28,6 +27,7 @@ export default function Home() {
   const handleSubmit = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
 
+    //Si el tipo de Formulario es Register ejecuta la función de Registro de Usuario, por el contrario, ejecutará la del Login de Usuario
     if (typeForm === "Register") {
       RegisterUser(userData);
     } else {
@@ -91,7 +91,9 @@ export default function Home() {
         className="w-1/2"
         style={{
           backgroundImage:
-            "linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(45,253,142,1) 100%)",
+            typeForm === "Register"
+              ? "linear-gradient(90deg, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%)"
+              : "linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(45,253,142,1) 100%)",
         }}
       ></section>
     </main>
