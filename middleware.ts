@@ -8,11 +8,11 @@ export function middleware(request: NextRequest) {
 
   //Si el usuario está en el path '/' y ya tiene un registro de Token en las cookies le da acceso a la aplicación, si está en cualquier otra dirección y no tiene el token, este lo redirige al login
   if (token && pathname === "/") {
-    return NextResponse.rewrite(new URL("/dashboard", request.url));
+    return NextResponse.redirect(new URL("/dashboard", request.url));
   }
 
   if (pathname !== "/" && !token) {
-    return NextResponse.rewrite(new URL("/", request.url));
+    return NextResponse.redirect(new URL("/", request.url));
   }
 
   return NextResponse.next();
