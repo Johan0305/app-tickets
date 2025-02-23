@@ -32,18 +32,15 @@ const Layout = ({ children }: Readonly<{ children: ReactNode }>) => {
               Tappsk
             </span>
           </Navbar.Brand>
-          <div className="order-2 hidden items-center md:flex">
-            <Button color="failure" onClick={HandleLogout}>
+          <div className="order-2 items-center md:flex">
+            <Button color="failure" size="sm" onClick={HandleLogout}>
               Log out
             </Button>
           </div>
-          <Navbar.Toggle />
-          <Navbar.Collapse>
-            <Navbar.Link href="#">Dashboard</Navbar.Link>
-          </Navbar.Collapse>
+          {/* <Navbar.Toggle /> */}
         </div>
       </MegaMenu>
-      <div className="w-2/3 pt-10">{children}</div>
+      <div className="w-full lg:w-2/3 pt-10">{children}</div>
     </div>
   );
 };

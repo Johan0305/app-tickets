@@ -57,13 +57,17 @@ const ModalCreateEditTask: FC<Props> = ({ onClose, dataModal }) => {
     }));
   };
 
+  //Función para Crear una Tarea
   const HandleCreateTask = () => {
     if (user) CreateTask(data, user?.id).then(() => onClose(false));
   };
 
+  //Función para Actualizar una Tarea
   const HandleUpdateTask = () => {
     if (data) UpdateTask(data).then(() => onClose(false));
   };
+
+  //Función para Eliminar una Tarea
   const HandleDeleteTask = () => {
     if (data.id) DeleteTask(data.id).then(() => onClose(false));
   };

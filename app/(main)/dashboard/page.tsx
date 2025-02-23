@@ -59,7 +59,7 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="flex flex-col gap-10">
+    <div className="flex flex-col gap-6 px-6 lg:gap-10">
       <Modal
         show={open}
         onClose={() => {
@@ -67,20 +67,23 @@ const Dashboard = () => {
           setDataModal(null);
         }}
         size="4xl"
+        position="center"
       >
         <ModalCreateEditTask onClose={setOpened} dataModal={dataModal} />
       </Modal>
-      <h1 className="text-4xl font-bold">Hi! That&apos;s your tasks</h1>
+      <h1 className="text-4xl font-bold">
+        Welcome! <br /> That&apos;s your tasks
+      </h1>
       <Card className="w-full">
-        <div className="flex justify-between">
+        <div className="flex flex-col gap-6 lg:flex-row justify-between">
           <TextInput
             id="title"
             name="title"
             placeholder="Search by title"
-            className="w-1/2"
+            className="w-full lg:w-1/2"
             onChange={handleChangeParams}
           />
-          <div className="flex gap-6">
+          <div className="grid grid-cols-2 lg:flex gap-6">
             {paramsChanges && (
               <span
                 className="text-blue-500 text-sm pt-3 cursor-pointer"
@@ -117,7 +120,11 @@ const Dashboard = () => {
               <option value="true">Finished</option>
               <option value="false">Pending</option>
             </Select>
-            <Button color="blue" onClick={() => setOpened(true)}>
+            <Button
+              color="blue"
+              className="col-span-2"
+              onClick={() => setOpened(true)}
+            >
               Add a Task
             </Button>
           </div>

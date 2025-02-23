@@ -20,9 +20,13 @@ const TableTask: FC<Props> = ({ setDataModal, setOpened }) => {
     <Table hoverable>
       <Table.Head>
         <Table.HeadCell>Title</Table.HeadCell>
-        <Table.HeadCell>Description</Table.HeadCell>
-        <Table.HeadCell>Delivery Date</Table.HeadCell>
-        <Table.HeadCell>Status</Table.HeadCell>
+        <Table.HeadCell className="hidden xl:table-cell">
+          Description
+        </Table.HeadCell>
+        <Table.HeadCell className="hidden lg:table-cell">
+          Delivery Date
+        </Table.HeadCell>
+        <Table.HeadCell className="hidden lg:table-cell">Status</Table.HeadCell>
         <Table.HeadCell>Actions</Table.HeadCell>
       </Table.Head>
       <Table.Body className="divide-y">
@@ -40,8 +44,13 @@ const TableTask: FC<Props> = ({ setDataModal, setOpened }) => {
             >
               {task.title}
             </Table.Cell>
-            <Table.Cell>{`${task.description.slice(0, 20)}...`}</Table.Cell>
-            <Table.Cell>{task.date}</Table.Cell>
+            <Table.Cell className="hidden xl:table-cell">{`${task.description.slice(
+              0,
+              20
+            )}...`}</Table.Cell>
+            <Table.Cell className="hidden lg:table-cell">
+              {task.date}
+            </Table.Cell>
             <Table.Cell>
               {task.status ? (
                 <Badge color="success">Finished</Badge>
@@ -49,7 +58,7 @@ const TableTask: FC<Props> = ({ setDataModal, setOpened }) => {
                 <Badge color="warning">Pending</Badge>
               )}
             </Table.Cell>
-            <Table.Cell>
+            <Table.Cell className="hidden lg:table-cell">
               <Dropdown inline>
                 <Dropdown.Item
                   onClick={() => {
