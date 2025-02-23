@@ -26,7 +26,7 @@ const Dashboard = () => {
     if (user) {
       GetTasks(user.id, params);
     }
-  }, [user, params]);
+  }, [user, params, GetTasks]);
 
   //Función para ir cambiando el estado de los parametros
   const handleChangeParams = (

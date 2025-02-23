@@ -4,6 +4,7 @@ import { UserService } from "@/actions/user.actions";
 import { UserDataForm } from "@/interfaces/User/user.interface";
 import { Button, Label, TextInput } from "flowbite-react";
 import { ChangeEvent, FormEvent, useState } from "react";
+import { HiMail } from "react-icons/hi";
 
 export default function Home() {
   const [userData, setUserData] = useState<UserDataForm>({
@@ -11,6 +12,7 @@ export default function Home() {
     password: "",
   });
   const [typeForm, setTypeForm] = useState<string>("Login");
+  const [seePasword, setSeePassword] = useState<boolean>(false);
   const { LoginUser, RegisterUser } = UserService();
 
   //Función encargada de cambiar el state de userData según el nombre de su input
@@ -52,18 +54,25 @@ export default function Home() {
               name="email"
               type="email"
               placeholder="name@flowbite.com"
+              icon={HiMail}
               onChange={handleChange}
               required
             />
           </div>
           <div>
-            <div className="mb-2 block">
+            <div className="mb-2 block flex justify-between">
               <Label htmlFor="password" value="Your password" />
+              <span
+                className="text-xs text-blue-400 cursor-pointer"
+                onClick={() => setSeePassword(!seePasword)}
+              >
+                {seePasword ? "Hidden Password" : "Show password"}
+              </span>
             </div>
             <TextInput
               id="password"
               name="password"
-              type="password"
+              type={seePasword ? "text" : "password"}
               required
               onChange={handleChange}
             />

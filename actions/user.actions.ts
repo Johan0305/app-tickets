@@ -56,7 +56,7 @@ export const UserService = () => {
       dispatch(setInitialState());
       deleteCookies("token");
       NotiSwal({ text: "Succesful Logout" });
-      redirect("/");
+      return redirect("/");
     });
   };
 
