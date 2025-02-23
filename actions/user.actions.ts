@@ -9,7 +9,6 @@ import {
 } from "@/services/user.service";
 import { setInitialState } from "@/store/reducers/task.reducer";
 import { setInitialStateUser, setUser } from "@/store/reducers/user.reducer";
-import { redirect } from "next/navigation";
 import { useDispatch } from "react-redux";
 
 export const UserService = () => {
@@ -25,9 +24,6 @@ export const UserService = () => {
 
         //Notificación de Usuario Logeado
         NotiSwal({ text: "Successful Login" });
-
-        //Redirección hacía el Dashboard
-        return redirect("/dashboard");
       }
     });
   };
@@ -56,7 +52,6 @@ export const UserService = () => {
       dispatch(setInitialState());
       deleteCookies("token");
       NotiSwal({ text: "Succesful Logout" });
-      return redirect("/");
     });
   };
 

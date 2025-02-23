@@ -3,6 +3,7 @@
 import { UserService } from "@/actions/user.actions";
 import { UserDataForm } from "@/interfaces/User/user.interface";
 import { Button, Label, TextInput } from "flowbite-react";
+import { useRouter } from "next/navigation";
 import { ChangeEvent, FormEvent, useState } from "react";
 import { HiMail } from "react-icons/hi";
 
@@ -14,6 +15,7 @@ export default function Home() {
   const [typeForm, setTypeForm] = useState<string>("Login");
   const [seePasword, setSeePassword] = useState<boolean>(false);
   const { LoginUser, RegisterUser } = UserService();
+  const router = useRouter();
 
   //Función encargada de cambiar el state de userData según el nombre de su input
   const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
@@ -33,7 +35,7 @@ export default function Home() {
     if (typeForm === "Register") {
       RegisterUser(userData);
     } else {
-      LoginUser(userData);
+      LoginUser(userData).then(() => router.push("/dashboard"));
     }
   };
 

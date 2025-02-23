@@ -2,6 +2,7 @@
 import { UserService } from "@/actions/user.actions";
 import { RootState } from "@/store/store";
 import { Button, MegaMenu, Navbar } from "flowbite-react";
+import { useRouter } from "next/navigation";
 import React, { ReactNode, useEffect } from "react";
 import { MdTask } from "react-icons/md";
 import { useSelector } from "react-redux";
@@ -9,6 +10,7 @@ import { useSelector } from "react-redux";
 const Layout = ({ children }: Readonly<{ children: ReactNode }>) => {
   const { GetCurrentUser, LogOutUser } = UserService();
   const { user } = useSelector((state: RootState) => state.user);
+  const router = useRouter();
 
   //Cuando se recarga la página, se encarga de que traiga los datos del usuario
   useEffect(() => {
@@ -19,7 +21,7 @@ const Layout = ({ children }: Readonly<{ children: ReactNode }>) => {
 
   //Función para cerrar la sesión actual
   const HandleLogout = () => {
-    LogOutUser();
+    LogOutUser().then(() => router.push("/"));
   };
 
   return (
