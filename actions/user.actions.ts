@@ -17,8 +17,6 @@ export const UserService = () => {
   //Servicio de Login de Usuario
   const LoginUser = async (formUser: UserDataForm): Promise<void> => {
     await LoginUserSupaBase(formUser).then((res) => {
-      console.log(res);
-
       if (res?.session) {
         dispatch(setUser(res.user));
         //Seteo de Cookies del token para su manejabilidad
