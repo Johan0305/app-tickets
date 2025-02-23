@@ -15,7 +15,7 @@ const Layout = ({ children }: Readonly<{ children: ReactNode }>) => {
     if (!user) {
       GetCurrentUser();
     }
-  }, [user]);
+  }, []);
 
   //Función para cerrar la sesión actual
   const HandleLogout = () => {

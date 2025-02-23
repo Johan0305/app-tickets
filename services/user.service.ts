@@ -57,6 +57,6 @@ export const Logout = async () => {
 
     return true;
   } catch (err: unknown) {
-    console.log(err);
+    HandleError(err);
   }
 };
