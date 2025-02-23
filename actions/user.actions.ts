@@ -7,7 +7,8 @@ import {
   Logout,
   RegisterUserSupaBase,
 } from "@/services/user.service";
-import { setUser } from "@/store/reducers/user.reducer";
+import { setInitialState } from "@/store/reducers/task.reducer";
+import { setInitialStateUser, setUser } from "@/store/reducers/user.reducer";
 import { redirect } from "next/navigation";
 import { useDispatch } from "react-redux";
 
@@ -51,6 +52,8 @@ export const UserService = () => {
   //cerrar la sesión actual
   const LogOutUser = async () => {
     await Logout().then(() => {
+      dispatch(setInitialStateUser());
+      dispatch(setInitialState());
       deleteCookies("token");
       NotiSwal({ text: "Succesful Logout" });
       redirect("/");

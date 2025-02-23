@@ -7,3 +7,9 @@ export interface Task {
   status: boolean;
   created_at: string;
 }
+
+export interface FilterTasks {
+  created_at: boolean;
+  title: string;
+  status: boolean | null;
+}

@@ -37,9 +37,12 @@ export default function Home() {
 
   return (
     <main className="w-screen h-screen flex">
-      <section className="w-1/2 flex flex-col justify-center items-center gap-6">
+      <section className="w-full lg:w-1/2 flex flex-col justify-center items-center gap-6 p-6">
         <h1 className="text-4xl font-bold">{typeForm}</h1>
-        <form className="flex w-1/2 flex-col gap-4" onSubmit={handleSubmit}>
+        <form
+          className="flex w-full lg:w-1/2 flex-col gap-4"
+          onSubmit={handleSubmit}
+        >
           <div>
             <div className="mb-2 block">
               <Label htmlFor="email" value="Your email" />
@@ -88,7 +91,7 @@ export default function Home() {
         </form>
       </section>
       <section
-        className="w-1/2"
+        className="w-1/2 hidden lg:flex"
         style={{
           backgroundImage:
             typeForm === "Register"

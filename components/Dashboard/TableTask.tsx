@@ -1,6 +1,7 @@
+import { TaskService } from "@/actions/task.actions";
 import { Task } from "@/interfaces/Task/ticket.interface";
 import { RootState } from "@/store/store";
-import { Dropdown, Table } from "flowbite-react";
+import { Badge, Dropdown, Table } from "flowbite-react";
 import React, { Dispatch, FC, SetStateAction } from "react";
 import { FaTrash } from "react-icons/fa";
 import { MdOutlineEdit } from "react-icons/md";
@@ -13,13 +14,14 @@ interface Props {
 
 const TableTask: FC<Props> = ({ setDataModal, setOpened }) => {
   const { tasks } = useSelector((state: RootState) => state.task);
+  const { DeleteTask } = TaskService();
 
   return (
     <Table hoverable>
       <Table.Head>
         <Table.HeadCell>Title</Table.HeadCell>
         <Table.HeadCell>Description</Table.HeadCell>
-        <Table.HeadCell>Date</Table.HeadCell>
+        <Table.HeadCell>Delivery Date</Table.HeadCell>
         <Table.HeadCell>Status</Table.HeadCell>
         <Table.HeadCell>Actions</Table.HeadCell>
       </Table.Head>
@@ -28,17 +30,25 @@ const TableTask: FC<Props> = ({ setDataModal, setOpened }) => {
           <Table.Row
             className="bg-white dark:border-gray-700 dark:bg-gray-800"
             key={task.id}
-            onClick={() => {
-              setDataModal(task);
-              setOpened(true);
-            }}
           >
-            <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
+            <Table.Cell
+              className="whitespace-nowrap font-medium text-gray-900 dark:text-white cursor-pointer"
+              onClick={() => {
+                setDataModal(task);
+                setOpened(true);
+              }}
+            >
               {task.title}
             </Table.Cell>
             <Table.Cell>{`${task.description.slice(0, 20)}...`}</Table.Cell>
             <Table.Cell>{task.date}</Table.Cell>
-            <Table.Cell>{task.status ? "true" : "false"}</Table.Cell>
+            <Table.Cell>
+              {task.status ? (
+                <Badge color="success">Finished</Badge>
+              ) : (
+                <Badge color="warning">Pending</Badge>
+              )}
+            </Table.Cell>
             <Table.Cell>
               <Dropdown inline>
                 <Dropdown.Item
@@ -53,7 +63,10 @@ const TableTask: FC<Props> = ({ setDataModal, setOpened }) => {
                   </div>
                 </Dropdown.Item>
                 <Dropdown.Item>
-                  <div className="flex gap-2 items-center">
+                  <div
+                    className="flex gap-2 items-center"
+                    onClick={() => DeleteTask(task.id)}
+                  >
                     <FaTrash />
                     Delete
                   </div>
