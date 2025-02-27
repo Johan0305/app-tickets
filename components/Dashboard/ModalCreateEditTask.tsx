@@ -29,7 +29,7 @@ const ModalCreateEditTask: FC<Props> = ({ onClose, dataModal }) => {
     dataModal || {
       title: "",
       description: "",
-      date: "",
+      date: new Date().toISOString().split("T")[0],
       status: false,
     }
   );
